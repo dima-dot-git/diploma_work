@@ -93,6 +93,8 @@ class Cart(models.Model):
         total = sum(item.product.price * item.amount for item in self.products.all())
         return total
 
+
+
     def __str__(self):
         return f" Cart: #{self.id} - User: {self.customer}"
 

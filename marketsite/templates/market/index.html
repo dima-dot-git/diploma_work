@@ -5,7 +5,8 @@
 <section class="section swiper-container swiper-slider swiper-slider-modern" data-loop="true" data-autoplay="10000"
          data-simulate-touch="true" data-nav="true" data-slide-effect="fade">
     <div class="swiper-wrapper text-left">
-        <div class="swiper-slide context-dark" data-slide-bg="{% static 'market/images/myImg/telescope-silhouette-against-scenic-night-sky-ldy5ujr2fjlzz2ik.jpg' %}">
+        <div class="swiper-slide context-dark"
+             data-slide-bg="{% static 'market/images/myImg/telescope-silhouette-against-scenic-night-sky-ldy5ujr2fjlzz2ik.jpg' %}">
             <div class="swiper-slide-caption">
                 <div class="container">
                     <div class="row justify-content-center justify-content-xxl-start">
@@ -13,7 +14,8 @@
                             <div class="slider-modern-box">
                                 <h1 class="slider-modern-title"><span data-caption-animate="slideInDown"
                                                                       data-caption-delay="0">Go to sky</span></h1>
-                                <p data-caption-animate="fadeInRight" data-caption-delay="400">Open the skies with us: telescopes for star travel!</p>
+                                <p data-caption-animate="fadeInRight" data-caption-delay="400">Open the skies with us:
+                                    telescopes for star travel!</p>
                                 <div class="oh button-wrap"><a class="button button-primary button-ujarak"
                                                                href="about-us.html" data-caption-animate="slideInLeft"
                                                                data-caption-delay="400">Read more</a></div>
@@ -31,7 +33,8 @@
                             <div class="slider-modern-box">
                                 <h1 class="slider-modern-title"><span data-caption-animate="slideInLeft"
                                                                       data-caption-delay="0">Explore space</span></h1>
-                                <p data-caption-animate="fadeInRight" data-caption-delay="400">See the beauty of space: we have the best telescopes!</p>
+                                <p data-caption-animate="fadeInRight" data-caption-delay="400">See the beauty of space:
+                                    we have the best telescopes!</p>
                                 <div class="oh button-wrap"><a class="button button-primary button-ujarak"
                                                                href="about-us.html" data-caption-animate="slideInLeft"
                                                                data-caption-delay="400">Read more</a></div>
@@ -72,7 +75,8 @@
                             {% endif%}
                         </div>
                         <div class="unit-body">
-                            <h6 class="box-icon-ruby-title"><a href="{% url 'categories' cat_id=category.id%}">{{category.name}}</a></h6>
+                            <h6 class="box-icon-ruby-title"><a href="{% url 'categories' cat_id=category.id%}">{{category.name}}</a>
+                            </h6>
                         </div>
                     </div>
                 </article>
@@ -98,27 +102,29 @@
                             <article class="product product-2 box-ordered-item wow slideInRight" data-wow-delay=0s">
                                 <div class="unit flex-lg-column">
                                     <div class="unit-left">
-                                        <div class="product-figure"><img src="{{ product.prod_img.first.photo.url }}" alt=""
+                                        <div class="product-figure"><img src="{{ product.prod_img.first.photo.url }}"
+                                                                         alt=""
                                                                          width="800" height="800"/>
                                             {%if user.is_authenticated %}
                                             <div class="product-button"><a
                                                     class="button button-lg button-white button-ujarak"
                                                     href="{% url 'add_to_cart' prod_pk=product.pk %}"
-                                                    >Add to cart</a>
+                                            >Add to cart</a>
 
                                             </div>
                                             {% else %}
                                             <div class="product-button"><a
                                                     class="button button-lg button-white button-ujarak"
                                                     href="{% url 'login_in_market' %}"
-                                                    >LogIn Now</a>
+                                            >LogIn Now</a>
 
                                             </div>
                                             {% endif %}
                                         </div>
                                     </div>
                                     <div class="unit-body">
-                                        <h6 class="product-title"><a href="{% url 'product' prod_pk=product.pk%}">{{product}}</a></h6>
+                                        <h6 class="product-title"><a href="{% url 'product' prod_pk=product.pk%}">{{product}}</a>
+                                        </h6>
                                         <div class="product-price-wrap">
                                             <div class="product-price product-price-old">1000</div>
                                             <div class="product-price">${{ product.price }}</div>
@@ -130,13 +136,16 @@
                     </div>
                     <!--End for product-->
                     {%endfor%}
-
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 
+<section class="section section-md bg-default n-top-image">
+    {% include "market/pagination.html" with page=products %}
+</section>
 
 <!-- Improve your interior with deco-->
 <section class="section section-md bg-default section-top-image">
@@ -149,13 +158,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInLeft" data-wow-delay="0s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-1-1200x800.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Watermelons</a></h4>
                         </div>
                     </article>
@@ -165,13 +176,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInUp" data-wow-delay=".1s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-2-1200x800.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Grapes</a></h4>
                         </div>
                     </article>
@@ -181,13 +194,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInRight" data-wow-delay=".0s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-3-800x1200.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Mandarin Oranges</a></h4>
                         </div>
                     </article>
@@ -197,13 +212,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInUp" data-wow-delay=".1s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-4-800x1200.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Lemons</a></h4>
                         </div>
                     </article>
@@ -213,13 +230,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInLeft" data-wow-delay="0s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-5-800x1200.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Organic Food</a></h4>
                         </div>
                     </article>
@@ -229,13 +248,15 @@
                 <div class="oh-desktop">
                     <!-- Thumbnail Classic-->
                     <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInDown" data-wow-delay=".1s">
-                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt=""
-                                                                width="370" height="303"/>
+                        <div class="thumbnail-mary-figure"><img
+                                src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt=""
+                                width="370" height="303"/>
                         </div>
                         <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
                                                                href="{% static 'market/images/gallery-original-6-1200x800.jpg'%}"
                                                                data-lightgallery="item"><img
-                                src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                                src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt="" width="370"
+                                height="303"/></a>
                             <h4 class="thumbnail-mary-title"><a href="#">Salad</a></h4>
                         </div>
                     </article>

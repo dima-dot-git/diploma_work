@@ -5,11 +5,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.sessions.models import Session
 from django.urls import reverse
 from django.views import View
-
 from .forms import RegUserForm
 from .models import ProductInCart, Category, Brand, Product, PhotoProduct, Cart, User, Profile
 from django.contrib.auth.decorators import login_required
 from .models import Cart, ProductInCart
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -30,6 +30,16 @@ def index(request):
     all_categories = Category.objects.all()
     photo = PhotoProduct.objects.all()
     cart = get_customer_cart(request)
+
+    paginator = Paginator(products, 2)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     context = {"cart": cart, "products": products, "all_categories": all_categories, "photo": photo}
     return render(request, "market/index.html", context)
 
@@ -40,6 +50,16 @@ def categories(request, cat_id):
     photo = PhotoProduct.objects.all()
     products = Product.objects.filter(category__exact=cat)
     cart = get_customer_cart(request)
+
+    paginator = Paginator(products, 2)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     context = {"products": products, "photo": photo, "cart": cart, "all_categories": all_categories}
     return render(request, 'market/index.html', context)
 
@@ -70,8 +90,6 @@ def in_cart(request):
         quantity = request.POST.get("quantity")
         select_product.amount = quantity
         select_product.save()
-        print(type(select_product))
-        print(quantity)
         return redirect("in_cart")
     context = {"cart": cart}
     return render(request, 'market/cart.html', context)
