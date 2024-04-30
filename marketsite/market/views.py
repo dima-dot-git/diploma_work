@@ -90,7 +90,7 @@ def in_cart(request):
         quantity = request.POST.get("quantity")
         select_product.amount = quantity
         select_product.save()
-        return redirect("in_cart")
+        return redirect("go_to_cart")
     context = {"cart": cart}
     return render(request, 'market/cart.html', context)
 
@@ -113,6 +113,7 @@ def del_of_cart(request, prod_pk):
         return redirect('index')
     else:
         return redirect('index')
+
 
 @login_required
 def get_customer_cart(request):
@@ -147,6 +148,12 @@ def product(request, prod_pk=None):
     product_in_cart = []
     for item in cart.products.all():
         product_in_cart.append(item.product)
-    context = {"cart": cart, "select_prod": select_prod,'product_in_cart':product_in_cart}
+    context = {"cart": cart, "select_prod": select_prod, 'product_in_cart': product_in_cart}
     return render(request, "market/product.html", context)
+
+
+def go_to_cart(request):
+    cart = get_customer_cart(request)
+    context = {"cart": cart}
+    return render(request, "market/go_to_cart.html", context)
 

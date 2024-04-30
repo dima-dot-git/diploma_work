@@ -16,5 +16,6 @@ urlpatterns = [
     path("login", LoginView.as_view(), name="login_in_market"),
     path("logout", MyLogoutView.as_view(), name="logout_of_market"),
     path("registry_customer", views.registry_customer, name="registry_customer"),
+    path("go_to_cart", views.go_to_cart, name="go_to_cart"),
 
 ]

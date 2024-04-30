@@ -59,8 +59,14 @@
                         <div class="rd-navbar-main-element">
                             <div class="rd-navbar-nav-wrap">
                                 <!-- RD Navbar Basket-->
-
-                                {% include 'market/cart.html' %}
+                                <div class="rd-navbar-basket-wrap">
+                                    <button class="rd-navbar-basket fl-bigmug-line-shopping202"
+                                            data-rd-navbar-toggle=".cart-inline"><span>{{ cart.products.count }}</span>
+                                    </button>
+                                    <div class="cart-inline">
+                                        {% include 'market/cart.html' %}
+                                    </div>
+                                </div>
                                 {%if user.is_authenticated %}
 
                                 {%else%}
@@ -133,9 +139,10 @@
                                 <div>
                                     <div class="row row-10 gutters-10">
                                         <div class="col-12"><img class="rounded-circle"
-                                                src="{{ user.market_user.all.first.avatar.url }} " alt=""
-                                                width="394"
-                                                height="255"/>
+                                                                 src="{{ user.market_user.all.first.avatar.url }} "
+                                                                 alt=""
+                                                                 width="394"
+                                                                 height="255"/>
                                         </div>
                                     </div>
                                     <div class="heading-6 subtitle">Contacts</div>
@@ -144,7 +151,8 @@
                                         <li>
                                             <div class="unit unit-spacing-sm">
                                                 <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                                <div class="unit-body"><a class="link-phone" href="tel:#">{{ user.market_user.all.first.phone_number }}</a></div>
+                                                <div class="unit-body"><a class="link-phone" href="tel:#">{{
+                                                    user.market_user.all.first.phone_number }}</a></div>
                                             </div>
                                         </li>
                                         <li>

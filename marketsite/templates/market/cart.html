@@ -1,56 +1,54 @@
-<div class="rd-navbar-basket-wrap">
-    <button class="rd-navbar-basket fl-bigmug-line-shopping202"
-            data-rd-navbar-toggle=".cart-inline"><span>{{ cart.products.count }}</span></button>
+<div class="cart-inline-header">
+    <h5 class="cart-inline-title">In cart: <span>{{ cart.products.count }}</span> Products</h5>
+    <h6 class="cart-inline-title">Total price:<span> ${{ cart.total_price }}</span></h6>
+</div>
+<div class="cart-inline-body">
 
-    <div class="cart-inline">
-        <div class="cart-inline-header">
-            <h5 class="cart-inline-title">In cart: <span>{{ cart.products.count }}</span> Products</h5>
-            <h6 class="cart-inline-title">Total price:<span> ${{ cart.total_price }}</span></h6>
-        </div>
-        <div class="cart-inline-body">
+    {% for prod in cart.products.all %}
+    <div class="cart-inline-item">
+        <div class="unit align-items-center">
+            <div class="unit-left"><a class="cart-inline-figure"
+                                      href="{% url 'product' prod_pk=prod.product.pk%}"><img
+                    src="{{prod.product.prod_img.first.photo.url}}" alt="prod" width="108"
+                    height="100"></a></div>
+            <div class="unit-body">
+                <h6 class="cart-inline-name"><a
+                        href="{% url 'product' prod_pk=prod.product.pk%}">{{prod.product}}</a>
+                </h6>
+                <div>
+                    <div class="group-xs group-inline-middle">
+                        <h6 class="cart-inline-title">Price: {{prod.product.price}}</h6>
 
-            {% for prod in cart.products.all %}
-            <div class="cart-inline-item">
-                <div class="unit align-items-center">
-                    <div class="unit-left"><a class="cart-inline-figure"
-                                              href="{% url 'product' prod_pk=prod.product.pk%}"><img
-                            src="{{prod.product.prod_img.first.photo.url}}" alt="prod" width="108"
-                            height="100"></a></div>
-                    <div class="unit-body">
-                        <h6 class="cart-inline-name"><a href="{% url 'product' prod_pk=prod.product.pk%}">{{prod.product}}</a>
-                        </h6>
-                        <div>
-                            <div class="group-xs group-inline-middle">
-                                <h6 class="cart-inline-title">Price: {{prod.product.price}}</h6>
-
-                                <form method="POST" action="{% url 'in_cart' %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="product_pk" value="{{prod.pk}}">
-                                    <div class="table-cart-stepper">
-                                        <input class="form-input" type="number" name="quantity"
-                                               data-zeros="true" value="{{ prod.amount }}" min="1"
-                                               max="1000">
-                                    </div>
-                                </form>
+                        <form method="POST" action="{% url 'in_cart' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_pk" value="{{prod.pk}}">
+                            <div class="table-cart-stepper">
+                                <input class="form-input" type="number" name="quantity"
+                                       data-zeros="true" value="{{ prod.amount }}" min="1"
+                                       max="1000">
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <form method="post" action="{% url 'del_of_cart' prod_pk=prod.pk %}">
-                        {% csrf_token %}
-                        <button class="btn btn-sm btn-primary" type="submit"><span
-                                style='font-size:25px;'>&#128465;</span></button>
-                    </form>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <div class="cart-inline-footer">
-            <div class="group-sm"><a
-                    class="button button-md button-default-outline-2 button-wapasha"
-                    href="{% url 'in_cart' %}">Go to cart</a><a
-                    class="button button-md button-primary button-pipaluk"
-                    href="#">Checkout</a>
-            </div>
+            <form method="post" action="{% url 'del_of_cart' prod_pk=prod.pk %}">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-primary" type="submit"><span
+                        style='font-size:25px;'>&#128465;</span></button>
+            </form>
         </div>
     </div>
+    {% endfor %}
 </div>
+<div class="cart-inline-footer">
+    <div class="group-sm">
+        <a
+                class="button button-md button-default-outline-2 button-wapasha"
+                href="{% url 'go_to_cart' %}">Go to cart</a>
+        <a
+                class="button button-md button-primary button-pipaluk"
+                href="#">Checkout</a>
+    </div>
+</div>
+
+
