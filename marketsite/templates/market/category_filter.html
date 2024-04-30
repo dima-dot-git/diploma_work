@@ -1,0 +1,56 @@
+{% extends "market/base.html" %}
+{% block content %}
+<section class="section section-md bg-default">
+    <div class="container">
+        <div class="row row-40 justify-content-center">
+            <!--            <div class="col-sm-8 col-md-7 col-lg-6 wow fadeInLeft" data-wow-delay="0s">-->
+            <!--                <div class="product-banner"><img src="PRODUCT BANNER HEAR.jpg" alt="" width="570"-->
+            <!--                                                 height="715"/>-->
+            <!--                    <div class="product-banner-content">-->
+            <!--                        <div class="product-banner-inner" style="background-image: url(images/bg-brush.png)">-->
+            <!--                            <h3 class="text-secondary-1">organic</h3>-->
+            <!--                            <h2 class="text-primary">Vegetables</h2>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div class="col-md-8 col-lg-12">
+                <div class="row row-30 justify-content-left">
+
+                    {%for product in products %}
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="oh-desktop">
+                            <!-- Product-->
+                            <article class="product product-2 box-ordered-item wow slideInRight" data-wow-delay=0s">
+                                <div class="unit flex-row flex-lg-column">
+                                    <div class="unit-left">
+                                        <div class="product-figure"><img src="{{ product.prod_img.first.photo.url }}"
+                                                                         alt=""
+                                                                         width="800" height="800"/>
+                                            <div class="product-button"><a
+                                                    class="button button-lg button-white button-ujarak"
+                                                    href="{% url 'add_to_cart' prod_pk=product.pk %}">Add to
+                                                cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="unit-body">
+                                        <h6 class="product-title"><a href="#">{{product}}</a></h6>
+                                        <div class="product-price-wrap">
+                                            <div class="product-price product-price-old"></div>
+                                            <div class="product-price">${{ product.price }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--End for product-->
+                    {%endfor%}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "market/base.html" %}
+{% block content %}
+<section class="section section-md bg-default">
+    <div class="container">
+        <div class="row row-40 justify-content-center">
+            <div class="col-sm-8 col-md-7 col-lg-6 wow fadeInLeft" data-wow-delay="0s">
+                <div class="product-banner"><img src="{{select_prod.prod_img.first.photo.url}}" alt="" width="570"
+                                                 height="715"/>
+                    <div class="product-banner-content">
+                        <h6 class="text-secondary">telescopeShop</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-6">
+                <div class="row row-30 justify-content-center">
+                    <div class="col">
+                        <div class="">
+                            <!-- Product-->
+                            <article class="" data-wow-delay="0s">
+                                <div class="">
+                                    <div class="">
+                                        <h6 class="product-title">{{select_prod}}</h6>
+                                        <div class="product-price-wrap">
+                                            <div class="product-price product-price-old"></div>
+                                            <div class="product-price left">${{select_prod.price}}</div>
+                                        </div>
+                                        {%if select_prod not in product_in_cart %}
+                                        <a class="button button-md button-secondary button-ujarak"
+                                           href="{% url 'add_to_cart' prod_pk=select_prod.pk %}">Add to
+                                            cart</a>
+                                        {% endif%}
+
+                                    </div>
+                                </div>
+                            </article>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="d-inline">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home" aria-selected="true">Detail</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                           aria-controls="profile" aria-selected="false">Specifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                           aria-controls="contact" aria-selected="false">In The Box</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        {{select_prod.details}}
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        {{select_prod.specifications}}
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

@@ -1,0 +1,247 @@
+{% extends 'market/base.html' %}
+{% block content %}
+{% load static %}
+<!-- Swiper-->
+<section class="section swiper-container swiper-slider swiper-slider-modern" data-loop="true" data-autoplay="10000"
+         data-simulate-touch="true" data-nav="true" data-slide-effect="fade">
+    <div class="swiper-wrapper text-left">
+        <div class="swiper-slide context-dark" data-slide-bg="{% static 'market/images/myImg/telescope-silhouette-against-scenic-night-sky-ldy5ujr2fjlzz2ik.jpg' %}">
+            <div class="swiper-slide-caption">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-xxl-start">
+                        <div class="col-md-10 col-xxl-6">
+                            <div class="slider-modern-box">
+                                <h1 class="slider-modern-title"><span data-caption-animate="slideInDown"
+                                                                      data-caption-delay="0">Go to sky</span></h1>
+                                <p data-caption-animate="fadeInRight" data-caption-delay="400">Open the skies with us: telescopes for star travel!</p>
+                                <div class="oh button-wrap"><a class="button button-primary button-ujarak"
+                                                               href="about-us.html" data-caption-animate="slideInLeft"
+                                                               data-caption-delay="400">Read more</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide context-dark" data-slide-bg="{% static 'market/images/myImg/spacee-scaled.jpg'%}">
+            <div class="swiper-slide-caption">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-xxl-start">
+                        <div class="col-md-10 col-xxl-6">
+                            <div class="slider-modern-box">
+                                <h1 class="slider-modern-title"><span data-caption-animate="slideInLeft"
+                                                                      data-caption-delay="0">Explore space</span></h1>
+                                <p data-caption-animate="fadeInRight" data-caption-delay="400">See the beauty of space: we have the best telescopes!</p>
+                                <div class="oh button-wrap"><a class="button button-primary button-ujarak"
+                                                               href="about-us.html" data-caption-animate="slideInLeft"
+                                                               data-caption-delay="400">Read more</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Swiper Navigation-->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <!-- Swiper Pagination-->
+    <div class="swiper-pagination swiper-pagination-style-2"></div>
+</section>
+
+<!-- Icons Ruby-->
+<section class="section section-md bg-default section-top-image">
+    <div class="container">
+        <div class="row row-30 justify-content-center">
+
+            {% for category in all_categories %}
+            <div class="col-4 col-sm-4 col-lg-2 wow fadeInRight" data-wow-delay="0s">
+                <article class="box-icon-ruby">
+                    <div class="unit box-icon-ruby-body flex-column flex-sm-column text-md-center flex-lg-column align-items-center text-lg-center flex-xl-column text-xl-center">
+                        <div class="unit-left">
+                            {% if category.name == 'Reflector Telescopes' %}
+                            <div class="box-icon-ruby-icon linearicons-reflector"></div>
+                            {% elif category.name == 'Refractor Telescopes' %}
+                            <div class="box-icon-ruby-icon linearicons-refractor"></div>
+                            {% elif category.name == 'Smart Telescopes' %}
+                            <div class="box-icon-ruby-icon linearicons-smart"></div>
+                            {% elif category.name == 'Solar Telescopes' %}
+                            <div class="box-icon-ruby-icon linearicons-solar"></div>
+                            {% elif category.name == 'Apochromat Telescopes' %}
+                            <div class="box-icon-ruby-icon linearicons-apochromat"></div>
+                            {% endif%}
+                        </div>
+                        <div class="unit-body">
+                            <h6 class="box-icon-ruby-title"><a href="{% url 'categories' cat_id=category.id%}">{{category.name}}</a></h6>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {%endfor%}
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Trending products-->
+<section class="section section-md bg-default">
+    <div class="container">
+        <div class="row row-40 justify-content-center">
+            <div class="col-md-8 col-lg-12">
+                <div class="row row-30 justify-content-left">
+
+                    {%for product in products %}
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="oh-desktop">
+                            <!-- Product-->
+                            <article class="product product-2 box-ordered-item wow slideInRight" data-wow-delay=0s">
+                                <div class="unit flex-lg-column">
+                                    <div class="unit-left">
+                                        <div class="product-figure"><img src="{{ product.prod_img.first.photo.url }}" alt=""
+                                                                         width="800" height="800"/>
+                                            {%if user.is_authenticated %}
+                                            <div class="product-button"><a
+                                                    class="button button-lg button-white button-ujarak"
+                                                    href="{% url 'add_to_cart' prod_pk=product.pk %}"
+                                                    >Add to cart</a>
+
+                                            </div>
+                                            {% else %}
+                                            <div class="product-button"><a
+                                                    class="button button-lg button-white button-ujarak"
+                                                    href="{% url 'login_in_market' %}"
+                                                    >LogIn Now</a>
+
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="unit-body">
+                                        <h6 class="product-title"><a href="{% url 'product' prod_pk=product.pk%}">{{product}}</a></h6>
+                                        <div class="product-price-wrap">
+                                            <div class="product-price product-price-old">1000</div>
+                                            <div class="product-price">${{ product.price }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--End for product-->
+                    {%endfor%}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Improve your interior with deco-->
+<section class="section section-md bg-default section-top-image">
+    <div class="container">
+        <div class="oh h2-title">
+            <h2 class="wow slideInUp" data-wow-delay="0s">Our Gallery</h2>
+        </div>
+        <div class="row row-30" data-lightgallery="group">
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInLeft" data-wow-delay="0s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-1-1200x800.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-1-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Watermelons</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInUp" data-wow-delay=".1s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-2-1200x800.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-2-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Grapes</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInRight" data-wow-delay=".0s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-3-800x1200.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-3-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Mandarin Oranges</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInUp" data-wow-delay=".1s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-4-800x1200.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-4-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Lemons</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInLeft" data-wow-delay="0s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-5-800x1200.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-5-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Organic Food</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="oh-desktop">
+                    <!-- Thumbnail Classic-->
+                    <article class="thumbnail thumbnail-mary thumbnail-sm wow slideInDown" data-wow-delay=".1s">
+                        <div class="thumbnail-mary-figure"><img src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt=""
+                                                                width="370" height="303"/>
+                        </div>
+                        <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60"
+                                                               href="{% static 'market/images/gallery-original-6-1200x800.jpg'%}"
+                                                               data-lightgallery="item"><img
+                                src="{% static 'market/images/grid-gallery-6-370x303.jpg'%}" alt="" width="370" height="303"/></a>
+                            <h4 class="thumbnail-mary-title"><a href="#">Salad</a></h4>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

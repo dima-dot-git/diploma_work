@@ -1,0 +1,11 @@
+{% extends "market/base.html" %}
+{% block content %}
+<div class="modal-body">
+<form method="POST" action="{% url 'login_in_market' %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn btn-default">
+    <a href="{% url 'registry_customer' %}" class="btn btn-default">Registration</a>
+</form>
+    </div>
+{% endblock %}
