@@ -154,6 +154,7 @@ def product(request, prod_pk=None):
 
 def go_to_cart(request):
     cart = get_customer_cart(request)
+    print(cart.sum_prod_in_cart())
     context = {"cart": cart}
     return render(request, "market/go_to_cart.html", context)
 

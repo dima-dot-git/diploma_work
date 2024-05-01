@@ -61,7 +61,7 @@
                                 <!-- RD Navbar Basket-->
                                 <div class="rd-navbar-basket-wrap">
                                     <button class="rd-navbar-basket fl-bigmug-line-shopping202"
-                                            data-rd-navbar-toggle=".cart-inline"><span>{{ cart.products.count }}</span>
+                                            data-rd-navbar-toggle=".cart-inline"><span>{{ cart.sum_prod_in_cart }}</span>
                                     </button>
                                     <div class="cart-inline">
                                         {% include 'market/cart.html' %}
@@ -73,7 +73,7 @@
                                 {% include 'market/user_login.html'%}
                                 {%endif%}
                                 <a class="rd-navbar-basket rd-navbar-basket-mobile fl-bigmug-line-shopping198"
-                                   href="#"><span><!--{{cart.products.count}}--> </span></a>
+                                   href="{% url 'go_to_cart' %}"><span> {{cart.sum_prod_in_cart}} </span></a>
                                 <!-- RD Navbar Search-->
                                 <div class="rd-navbar-search">
                                     <button class="rd-navbar-search-toggle"
