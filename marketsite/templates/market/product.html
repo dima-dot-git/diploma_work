@@ -28,6 +28,13 @@
                                         <a class="button button-md button-secondary button-ujarak"
                                            href="{% url 'add_to_cart' prod_pk=select_prod.pk %}">Add to
                                             cart</a>
+                                        {%else%}
+                                        <form method="post" action="{% url 'del_of_cart' prod_pk=select_prod.pk %}">
+                                            {%csrf_token%}
+                                            <button class="button button-md button-secondary button-ujarak"
+                                                    type="submit">Del of cart
+                                            </button>
+                                        </form>
                                         {% endif%}
 
                                     </div>
@@ -43,8 +50,8 @@
             <div class="d-inline">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                           aria-controls="home" aria-selected="true">Detail</a>
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home" aria-selected="false">Detail</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
@@ -56,13 +63,18 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        {{select_prod.details}}
+                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <pre>{{select_prod.details}}</pre>
+
                     </div>
+
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         {{select_prod.specifications}}
+
                     </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...
+
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
                     </div>
                 </div>
             </div>

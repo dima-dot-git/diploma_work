@@ -1,5 +1,5 @@
 from django import forms
-from .models import ProductInCart, User
+from .models import ProductInCart, User, Subscribe
 from django.forms import inlineformset_factory
 
 
@@ -33,3 +33,9 @@ class RegUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class SubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscribe
+        fields = "__all__"

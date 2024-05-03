@@ -106,12 +106,15 @@
                                                                          alt=""
                                                                          width="800" height="800"/>
                                             {%if user.is_authenticated %}
-                                            <div class="product-button"><a
-                                                    class="button button-lg button-white button-ujarak"
-                                                    href="{% url 'add_to_cart' prod_pk=product.pk %}"
-                                            >Add to cart</a>
+                                            <form method="post" action="{% url 'add_to_cart' prod_pk=product.pk %}">
+                                                {% csrf_token %}
+                                                <div class="product-button">
+                                                    <button class="button button-lg button-white button-ujarak"
+                                                            type="submit">Add to cart
+                                                    </button>
+                                                </div>
 
-                                            </div>
+                                            </form>
                                             {% else %}
                                             <div class="product-button"><a
                                                     class="button button-lg button-white button-ujarak"

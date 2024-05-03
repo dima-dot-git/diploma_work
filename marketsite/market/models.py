@@ -124,3 +124,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
+
+
+class Subscribe(models.Model):
+    email = models.EmailField()

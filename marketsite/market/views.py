@@ -1,11 +1,12 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import AnonymousUser
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.sessions.models import Session
 from django.urls import reverse
 from django.views import View
-from .forms import RegUserForm
+from .forms import RegUserForm, SubscribeForm
 from .models import ProductInCart, Category, Brand, Product, PhotoProduct, Cart, User, Profile
 from django.contrib.auth.decorators import login_required
 from .models import Cart, ProductInCart
@@ -31,7 +32,7 @@ def index(request):
     photo = PhotoProduct.objects.all()
     cart = get_customer_cart(request)
 
-    paginator = Paginator(products, 2)
+    paginator = Paginator(products, 4)
     page = request.GET.get('page')
     try:
         products = paginator.page(page)
@@ -98,11 +99,12 @@ def in_cart(request):
 def add_to_cart(request, prod_pk):
     product = get_object_or_404(Product, pk=prod_pk)
     cart = get_customer_cart(request)
-    product_in_cart, created = ProductInCart.objects.get_or_create(cart=cart, product=product)
-    if created:
-        product_in_cart = ProductInCart(product=product, amount=1)
-        product_in_cart.save()
-        cart.products.add(product_in_cart)
+    if request.method == "POST":
+        product_in_cart, created = ProductInCart.objects.get_or_create(cart=cart, product=product)
+        if created:
+            product_in_cart = ProductInCart(product=product, amount=1)
+            product_in_cart.save()
+            cart.products.add(product_in_cart)
     return redirect("index")
 
 
@@ -139,9 +141,6 @@ def registry_customer(request):
     return render(request, "market/registry_customer.html", context)
 
 
-"hggvxv3887743ggagYTT"
-
-
 def product(request, prod_pk=None):
     cart = get_customer_cart(request)
     select_prod = get_object_or_404(Product, pk=prod_pk)
@@ -158,3 +157,22 @@ def go_to_cart(request):
     context = {"cart": cart}
     return render(request, "market/go_to_cart.html", context)
 
+
+def search(request):
+    query = request.GET.get("search")
+    cart = get_customer_cart(request)
+    products = Product.objects.filter(
+        Q(model__icontains=query) | Q(brand__name__icontains=query) | Q(category__name__icontains=query))
+    context = {"products": products, "cart": cart}
+    return render(request, 'market/index.html', context)
+
+
+def subscribe(request):
+    if request.method == "POST":
+        subscribe_form = SubscribeForm(request.POST)
+        if subscribe_form.is_valid():
+            subscribe_form.save()
+    return redirect("index")
+
+
+"hggvxv3887743ggagYTT"

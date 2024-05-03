@@ -79,7 +79,7 @@
                                     <button class="rd-navbar-search-toggle"
                                             data-rd-navbar-toggle=".rd-navbar-search">
                                         <span></span></button>
-                                    <form class="rd-search" action="#">
+                                    <form method="get" action="{% url 'search' %}" class="rd-search">
                                         <div class="form-wrap">
                                             <label class="form-label"
                                                    for="rd-navbar-search-form-input">Search...</label>
@@ -125,72 +125,8 @@
                         </div>
                         <div class="rd-navbar-project rd-navbar-modern-project">
                             <!--Settings header-->
-                            <div class="rd-navbar-project-modern-header">
-                                {%if user.is_authenticated %}
-                                <h4 class="rd-navbar-project-modern-title">{{user}}</h4>
-                                {% endif%}
-                                <div class="rd-navbar-project-hamburger" data-multitoggle=".rd-navbar-main"
-                                     data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate>
-                                    <div class="project-close"><span></span><span></span></div>
-                                </div>
-                            </div>
-                            <!--Settings content-->
-                            <div class="rd-navbar-project-content rd-navbar-modern-project-content">
-                                <div>
-                                    <div class="row row-10 gutters-10">
-                                        <div class="col-12"><img class="rounded-circle"
-                                                                 src="{{ user.market_user.all.first.avatar.url }} "
-                                                                 alt=""
-                                                                 width="394"
-                                                                 height="255"/>
-                                        </div>
-                                    </div>
-                                    <div class="heading-6 subtitle">Contacts</div>
+                            {% include 'market/user_info.html' %}
 
-                                    <ul class="rd-navbar-modern-contacts">
-                                        <li>
-                                            <div class="unit unit-spacing-sm">
-                                                <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                                <div class="unit-body"><a class="link-phone" href="tel:#">{{
-                                                    user.market_user.all.first.phone_number }}</a></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="unit unit-spacing-sm">
-                                                <div class="unit-left"><span
-                                                        class="icon fa fa-location-arrow"></span>
-                                                </div>
-                                                <div class="unit-body"><a class="link-location" href="#">{{user.address}}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="unit unit-spacing-sm">
-                                                <div class="unit-left"><span class="icon fa fa-envelope"></span>
-                                                </div>
-                                                <div class="unit-body"><a class="link-email" href="mailto:#">{{user.email}}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="unit unit-spacing-sm">
-                                                <div class="unit-center"><span class="icon mdi mdi-logout"></span>
-                                                </div>
-                                                <div class="unit-body"><a class="link-email"
-                                                                          href="{% url 'logout_of_market'%}">Exit</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="list-inline rd-navbar-modern-list-social">
-                                        <li><a class="icon fa fa-facebook" href="#"></a></li>
-                                        <li><a class="icon fa fa-twitter" href="#"></a></li>
-                                        <li><a class="icon fa fa-google-plus" href="#"></a></li>
-                                        <li><a class="icon fa fa-instagram" href="#"></a></li>
-                                        <li><a class="icon fa fa-pinterest" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -252,7 +188,8 @@
                                 <h5>Newsletter</h5>
                                 <p>Join our email newsletter for news and tips.</p>
                                 <form class="rd-form rd-mailform" data-form-output="form-output-global"
-                                      data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
+                                      data-form-type="subscribe" method="post" action="{% url 'subscribe' %}">
+                                    {% csrf_token %}
                                     <div class="form-wrap">
                                         <input class="form-input" id="subscribe-form-5-email" type="email" name="email"
                                                data-constraints="@Email @Required">
