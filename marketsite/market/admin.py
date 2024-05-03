@@ -15,3 +15,4 @@ admin.site.register(ProductInStock)
 admin.site.register(ProductInCart)
 admin.site.register(Profile)
 admin.site.register(Subscribe)
+

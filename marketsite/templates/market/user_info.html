@@ -1,7 +1,6 @@
 <div class="rd-navbar-project-modern-header">
-    {%if user.is_authenticated %}
     <h4 class="rd-navbar-project-modern-title">{{user}}</h4>
-    {% endif%}
+
     <div class="rd-navbar-project-hamburger" data-multitoggle=".rd-navbar-main"
          data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate>
         <div class="project-close"><span></span><span></span></div>
@@ -10,6 +9,7 @@
 <!--Settings content-->
 <div class="rd-navbar-project-content rd-navbar-modern-project-content">
     <div>
+        {%if user.is_authenticated %}
         <div class="row row-10 gutters-10">
             <div class="col-12"><img class="rounded-circle"
                                      src="{{ user.market_user.all.first.avatar.url }} "
@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="heading-6 subtitle">Contacts</div>
-
         <ul class="rd-navbar-modern-contacts">
+            {% if user.market_user.all.first.phone_number %}
             <li>
                 <div class="unit unit-spacing-sm">
                     <div class="unit-left"><span class="icon fa fa-phone"></span></div>
@@ -30,15 +30,19 @@
                     </div>
                 </div>
             </li>
+            {%endif%}
+            {% if user.market_user.all.first.address %}
             <li>
                 <div class="unit unit-spacing-sm">
                     <div class="unit-left"><span
                             class="icon fa fa-location-arrow"></span>
                     </div>
-                    <div class="unit-body"><a class="link-location" href="#">{{user.address}}</a>
+                    <div class="unit-body"><a class="link-location" href="#">{{user.market_user.all.first.address}}</a>
                     </div>
                 </div>
             </li>
+            {%endif%}
+            {% if user.email %}
             <li>
                 <div class="unit unit-spacing-sm">
                     <div class="unit-left"><span class="icon fa fa-envelope"></span>
@@ -47,11 +51,12 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
             <li>
                 <div class="unit unit-spacing-sm">
-                    <div class="unit-left"><span class="icon mdi mdi-account-remove"></span>
+                    <div class="unit-left"><span class="icon fa fa-edit"></span>
                     </div>
-                    <div class="unit-body"><a class="link-email" href="mailto:#">Edit profile</a>
+                    <div class="unit-body"><a href="#">Edit profile</a>
                     </div>
                 </div>
             </li>
@@ -59,8 +64,7 @@
                 <div class="unit unit-spacing-sm">
                     <div class="unit-center"><span class="icon mdi mdi-logout"></span>
                     </div>
-                    <div class="unit-body"><a class="link-email"
-                                              href="{% url 'logout_of_market'%}">Exit</a>
+                    <div class="unit-body"><a href="{% url 'logout_of_market'%}">Exit</a>
                     </div>
                 </div>
             </li>
@@ -73,4 +77,9 @@
             <li><a class="icon fa fa-pinterest" href="#"></a></li>
         </ul>
     </div>
+    {% else %}
+    <div>
+        {% include 'market/user_login.html' %}
+    </div>
+    {% endif%}
 </div>

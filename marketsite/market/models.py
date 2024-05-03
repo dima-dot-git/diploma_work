@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 
 
-
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name="Name")
 
@@ -99,8 +98,6 @@ class Cart(models.Model):
             sum_prod += prod.amount
         return sum_prod
 
-
-
     def __str__(self):
         return f" Cart: #{self.id} - User: {self.customer}"
 
@@ -115,8 +112,9 @@ class Orders(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User", related_name="market_user")
-    avatar = models.ImageField(upload_to="user_ava",blank=True,default="user_ava/user-avatar_0WPOaNi.png")
+    avatar = models.ImageField(upload_to="user_ava", blank=True, default="user_ava/user-avatar_0WPOaNi.png")
     phone_number = models.CharField(max_length=20, verbose_name="Phone Number", blank=True, null=True)
+    address = models.CharField(max_length=50, verbose_name="Address", blank=True, null=True)
 
     def __str__(self):
         return f"{self.user}"
