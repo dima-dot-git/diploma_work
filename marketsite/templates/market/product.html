@@ -25,11 +25,18 @@
                                             <div class="product-price left">${{select_prod.price}}</div>
                                         </div>
                                         {%if select_prod not in product_in_cart %}
-                                        <a class="button button-md button-secondary button-ujarak"
-                                           href="{% url 'add_to_cart' prod_pk=select_prod.pk %}">Add to
-                                            cart</a>
+                                        <form method="post" action="{% url 'add_to_cart' prod_pk=select_prod.pk %}">
+                                            <div class="button-product">
+                                                {% csrf_token %}
+                                                <button class="button button-lg button-white button-ujarak"
+                                                        type="submit">Add to cart
+                                                </button>
+                                            </div>
+
+                                        </form>
                                         {%else%}
-                                        <form method="post" action="{% url 'del_of_cart' prod_pk=select_prod.pk %}">
+                                        <form method="post"
+                                              action="{% url 'del_of_cart' prod_pk=select_prod_in_cart.first.pk %}">
                                             {%csrf_token%}
                                             <button class="button button-md button-secondary button-ujarak"
                                                     type="submit">Del of cart

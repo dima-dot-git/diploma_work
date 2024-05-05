@@ -106,6 +106,7 @@ def add_to_cart(request, prod_pk):
             product_in_cart = ProductInCart(product=product, amount=1)
             product_in_cart.save()
             cart.products.add(product_in_cart)
+
     return redirect("index")
 
 
@@ -145,10 +146,12 @@ def registry_customer(request):
 def product(request, prod_pk=None):
     cart = get_customer_cart(request)
     select_prod = get_object_or_404(Product, pk=prod_pk)
+    select_prod_in_cart = cart.products.filter(product=select_prod)
     product_in_cart = []
     for item in cart.products.all():
         product_in_cart.append(item.product)
-    context = {"cart": cart, "select_prod": select_prod, 'product_in_cart': product_in_cart}
+    context = {"cart": cart, "select_prod": select_prod, 'product_in_cart': product_in_cart,
+               "select_prod_in_cart": select_prod_in_cart}
     return render(request, "market/product.html", context)
 
 
@@ -195,5 +198,5 @@ def edit_profile(request, profile_pk):
         change_profile_form = ProfileForm(instance=profile)
         user_form = UserForm(instance=user)
         set_ava_form = SetAvaForm(instance=profile)
-    context = {"change_profile_form": change_profile_form, "user_form": user_form,"set_ava_form":set_ava_form}
+    context = {"change_profile_form": change_profile_form, "user_form": user_form, "set_ava_form": set_ava_form}
     return render(request, "market/edit_profile.html", context)
