@@ -17,7 +17,7 @@
                 </h6>
                 <div>
                     <div class="group-xs group-inline-middle">
-                        <h6 class="cart-inline-title">Price: {{prod.product.price}}</h6>
+                        <h6 class="cart-inline-title">Price: ${{prod.product.price}}</h6>
 
                         <form method="POST" action="{% url 'in_cart' %}">
                             {% csrf_token %}

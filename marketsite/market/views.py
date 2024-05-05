@@ -6,11 +6,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.sessions.models import Session
 from django.urls import reverse
 from django.views import View
-from .forms import RegUserForm, SubscribeForm
+from .forms import RegUserForm, SubscribeForm, ProfileForm, SetAvaForm, UserForm
 from .models import ProductInCart, Category, Brand, Product, PhotoProduct, Cart, User, Profile
 from django.contrib.auth.decorators import login_required
 from .models import Cart, ProductInCart
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -176,3 +177,23 @@ def subscribe(request):
 
 
 "hggvxv3887743ggagYTT"
+
+
+def edit_profile(request, profile_pk):
+    profile = get_object_or_404(Profile, pk=profile_pk)
+    user = get_object_or_404(User, pk=profile_pk)
+    if request.method == 'POST':
+        change_profile_form = ProfileForm(request.POST, instance=profile)
+        user_form = UserForm(request.POST, instance=user)
+        set_ava_form = SetAvaForm(request.POST, request.FILES, instance=profile)
+        if change_profile_form.is_valid() and user_form.is_valid() and set_ava_form.is_valid():
+            change_profile_form.save()
+            user_form.save()
+            set_ava_form.save()
+            return redirect("index")
+    else:
+        change_profile_form = ProfileForm(instance=profile)
+        user_form = UserForm(instance=user)
+        set_ava_form = SetAvaForm(instance=profile)
+    context = {"change_profile_form": change_profile_form, "user_form": user_form,"set_ava_form":set_ava_form}
+    return render(request, "market/edit_profile.html", context)

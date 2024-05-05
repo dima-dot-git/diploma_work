@@ -1,0 +1,20 @@
+{% extends 'market/base.html' %}
+{% block content %}
+
+<form class="form-input" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="set-ava-form">
+        <img class="rounded-circle" width="200px" src="{{ user.market_user.first.avatar.url }}" alt="Avatar">
+        {{ set_ava_form.as_p }}
+    </div>
+    <div class="change-profile-form">
+        {{ change_profile_form.as_p }}
+    </div>
+    <div class="user-form">
+        {{ user_form.as_p }}
+    </div>
+    <button type="submit">Save</button>
+</form>
+
+
+{% endblock %}

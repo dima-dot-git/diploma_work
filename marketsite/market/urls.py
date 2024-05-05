@@ -19,5 +19,5 @@ urlpatterns = [
     path("go_to_cart", views.go_to_cart, name="go_to_cart"),
     path("search", views.search, name="search"),
     path("subscribe", views.subscribe, name="subscribe"),
-
+    path("edit_profile/<int:profile_pk>", views.edit_profile, name="edit_profile"),
 ]

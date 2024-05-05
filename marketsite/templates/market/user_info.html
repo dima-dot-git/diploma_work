@@ -1,5 +1,5 @@
 <div class="rd-navbar-project-modern-header">
-    <h4 class="rd-navbar-project-modern-title">{{user}}</h4>
+    <h4 class="rd-navbar-project-modern-title">Profile</h4>
 
     <div class="rd-navbar-project-hamburger" data-multitoggle=".rd-navbar-main"
          data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate>
@@ -10,16 +10,20 @@
 <div class="rd-navbar-project-content rd-navbar-modern-project-content">
     <div>
         {%if user.is_authenticated %}
+        <h4 class="rd-navbar-project-modern-title">User</h4>
+        <h5 class="rd-navbar-project-modern-title">{{user}}</h5>
         <div class="row row-10 gutters-10">
-            <div class="col-12"><img class="rounded-circle"
-                                     src="{{ user.market_user.all.first.avatar.url }} "
-                                     alt=""
-                                     width="394"
-                                     height="255"/>
+            <div class="col-12">
+                <img
+                        class="rounded-circle"
+                        src="{{ user.market_user.all.first.avatar.url }} "
+                        alt="">
             </div>
+
         </div>
-        <div class="heading-6 subtitle">Contacts</div>
-        <ul class="rd-navbar-modern-contacts">
+
+        <div class="heading-6 subtitle">User info</div>
+        <ul class="rd-navbar-modern-contacts" id="user-info" style="display:block">
             {% if user.market_user.all.first.phone_number %}
             <li>
                 <div class="unit unit-spacing-sm">
@@ -37,7 +41,8 @@
                     <div class="unit-left"><span
                             class="icon fa fa-location-arrow"></span>
                     </div>
-                    <div class="unit-body"><a class="link-location" href="#">{{user.market_user.all.first.address}}</a>
+                    <div class="unit-body"><a class="link-location"
+                                              href="#">{{user.market_user.all.first.address}}</a>
                     </div>
                 </div>
             </li>
@@ -56,10 +61,12 @@
                 <div class="unit unit-spacing-sm">
                     <div class="unit-left"><span class="icon fa fa-edit"></span>
                     </div>
-                    <div class="unit-body"><a href="#">Edit profile</a>
+                    <div class="unit-body"><a href="{% url 'edit_profile' profile_pk=user.pk %}" onclick="toggleForm()">User edit</a>
                     </div>
                 </div>
             </li>
+        </ul>
+        <ul class="rd-navbar-modern-contacts">
             <li>
                 <div class="unit unit-spacing-sm">
                     <div class="unit-center"><span class="icon mdi mdi-logout"></span>
@@ -79,7 +86,18 @@
     </div>
     {% else %}
     <div>
+        <h5 style="margin-bottom:30px;margin-top:10px;">Login</h5>
         {% include 'market/user_login.html' %}
+        <h5 style="margin-bottom:30px;margin-top:10px;">Registration</h5>
+        {% include 'market/registry_customer.html' %}
     </div>
     {% endif%}
 </div>
+<script>
+    function toggleForm() {
+        let edit_menu = document.getElementById('edit-menu');
+        edit_menu.style.display = (edit_menu.style.display == 'none') ? 'block' : 'none';
+        let user_info = document.getElementById('user-info');
+        user_info.style.display = (user_info.style.display == 'none') ? 'block' : 'none';
+    }
+</script>

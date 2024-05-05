@@ -1,5 +1,5 @@
 from django import forms
-from .models import ProductInCart, User, Subscribe
+from .models import ProductInCart, User, Subscribe, Profile
 from django.forms import inlineformset_factory
 
 
@@ -29,7 +29,7 @@ class RegUserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password"])  # Устанавливаем хешированный пароль
+        user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user
@@ -39,3 +39,21 @@ class SubscribeForm(forms.ModelForm):
     class Meta:
         model = Subscribe
         fields = "__all__"
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["phone_number", "address"]
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["username", "email"]
+
+
+class SetAvaForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar']
