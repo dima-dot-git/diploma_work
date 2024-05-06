@@ -1,20 +1,16 @@
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import AnonymousUser
+
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.sessions.models import Session
 from django.urls import reverse
 from django.views import View
 from .forms import RegUserForm, SubscribeForm, ProfileForm, SetAvaForm, UserForm
-from .models import ProductInCart, Category, Brand, Product, PhotoProduct, Cart, User, Profile
+from .models import Category, Product, PhotoProduct, User, Profile
 from django.contrib.auth.decorators import login_required
 from .models import Cart, ProductInCart
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse
 
 
-# Create your views here.
 class MyLogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -33,7 +29,7 @@ def index(request):
     photo = PhotoProduct.objects.all()
     cart = get_customer_cart(request)
 
-    paginator = Paginator(products, 4)
+    paginator = Paginator(products, 8)
     page = request.GET.get('page')
     try:
         products = paginator.page(page)
@@ -53,7 +49,7 @@ def categories(request, cat_id):
     products = Product.objects.filter(category__exact=cat)
     cart = get_customer_cart(request)
 
-    paginator = Paginator(products, 2)
+    paginator = Paginator(products, 8)
     page = request.GET.get('page')
     try:
         products = paginator.page(page)
@@ -157,7 +153,6 @@ def product(request, prod_pk=None):
 
 def go_to_cart(request):
     cart = get_customer_cart(request)
-    print(cart.sum_prod_in_cart())
     context = {"cart": cart}
     return render(request, "market/go_to_cart.html", context)
 
@@ -177,9 +172,6 @@ def subscribe(request):
         if subscribe_form.is_valid():
             subscribe_form.save()
     return redirect("index")
-
-
-"hggvxv3887743ggagYTT"
 
 
 def edit_profile(request, profile_pk):
