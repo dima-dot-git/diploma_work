@@ -20,4 +20,5 @@ urlpatterns = [
     path("search", views.search, name="search"),
     path("subscribe", views.subscribe, name="subscribe"),
     path("edit_profile/<int:profile_pk>", views.edit_profile, name="edit_profile"),
+
 ]

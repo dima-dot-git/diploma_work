@@ -1,0 +1,10 @@
+{% extends 'market/base.html'%}
+{% block content %}
+<div class="container">
+    <div class="row row-20 justify-content-left" style="margin-bottom:30px;">
+        {% for item in all_item_stock %}
+        <p>{{ item }}</p>
+        {%endfor%}
+    </div>
+</div>
+{% endblock %}

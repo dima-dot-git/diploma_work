@@ -135,9 +135,11 @@
                                     <li class="rd-nav-item {%if request.path ==  '/market/about_us' %}active{% endif %}">
                                         <a class="rd-nav-link" href="{% url 'about_us' %}">About Us</a>
                                     </li>
-                                    <li class="rd-nav-item {%if request.path ==  '/market/typography' %}active{% endif %}">
-                                        <a class="rd-nav-link" href="{% url 'typography' %}">Typography</a>
+                                    {% if user.username == 'admin' %}
+                                    <li class="rd-nav-item {%if request.path ==  '/administrate/stock' %}active{% endif %}">
+                                        <a class="rd-nav-link" href="{% url 'stock' %}">Stock</a>
                                     </li>
+                                    {% endif %}
                                     <li class="rd-nav-item {%if request.path ==  '/market/contact_us' %}active{% endif %}">
                                         <a class="rd-nav-link" href="{% url 'contact_us' %}">Contact Us</a>
                                     </li>
