@@ -23,7 +23,7 @@ def get_info(request):
 
 
 def index(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by("id")
     all_categories = Category.objects.all()
     photo = PhotoProduct.objects.all()
     cart = get_customer_cart(request)
@@ -45,7 +45,7 @@ def categories(request, cat_id):
     cat = get_object_or_404(Category, id=cat_id)
     all_categories = Category.objects.all()
     photo = PhotoProduct.objects.all()
-    products = Product.objects.filter(category__exact=cat)
+    products = Product.objects.filter(category__exact=cat).order_by("id")
     cart = get_customer_cart(request)
 
     paginator = Paginator(products, 8)
